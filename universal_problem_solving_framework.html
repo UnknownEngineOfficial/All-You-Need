@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Problem-Solving Framework - A Strategic Approach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 50px;
+        }
+        
+        body.dark-mode .container {
+            background: #0f3460;
+            color: #e8e8e8;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2c3e50 0%, #3498db 100%);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        body.dark-mode .btn {
+            background: rgba(15, 52, 96, 0.9);
+            color: #e8e8e8;
+        }
+        
+        body.dark-mode .btn:hover {
+            background: #16213e;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 50px 60px;
+        }
+        
+        .phase {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .phase {
+            background: rgba(22, 33, 62, 0.5);
+            border-left-color: #3498db;
+        }
+        
+        .phase:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phase-header {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        body.dark-mode .phase-header {
+            color: #3498db;
+        }
+        
+        .phase-number {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        .phase p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .methods {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        body.dark-mode .methods {
+            background: rgba(15, 52, 96, 0.6);
+        }
+        
+        .methods h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .methods ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .methods li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .methods li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .meta-principles {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .meta-principles h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .principle-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .principle-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        
+        .principle-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .intro {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(44, 62, 80, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 2px solid #3498db;
+        }
+        
+        body.dark-mode .intro {
+            background: rgba(52, 152, 219, 0.05);
+            border-color: #3498db;
+        }
+        
+        .intro p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .phase {
+                padding: 20px;
+            }
+            
+            .phase-header {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="container">
+        <div class="controls">
+            <button class="btn" id="darkModeToggle" onclick="toggleDarkMode()">
+                🌙 Dark Mode
+            </button>
+            <button class="btn" onclick="window.print()">
+                🖨️ Print
+            </button>
+        </div>
+        
+        <div class="header">
+            <h1>Universal Problem-Solving Framework</h1>
+            <div class="subtitle">A Strategic Approach Based on DMAIC, 8D, and Structured Analysis</div>
+        </div>
+        
+        <div class="content">
+            <div class="intro">
+                <p>An effective universal problem-solving framework is based on proven methodologies like DMAIC, 8D, and structured analytical approaches. It can be divided into 6 core phases that guide you from problem identification to sustainable solution implementation.</p>
+            </div>
+            
+            <!-- Phase 1 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <div>Identification & Definition</div>
+                </div>
+                <p>Precise problem definition is the most critical step, as an incorrect problem statement leads to wasted effort. Use the <strong>SCQA method</strong> (Situation, Complication, Question, Answer): First describe the situation (context), identify the complication (the specific problem), and formulate a clear question that needs to be answered. Utilize <strong>5W2H questions</strong> (Who, What, When, Where, Why, How, How much) for complete problem capture.</p>
+                <p><strong>Reframing</strong> is essential: Remove assumed limitations and view the problem from completely different perspectives to enable innovative solution approaches. Document the problem quantifiably and convert symptoms into concrete "object and defect" descriptions.</p>
+                <div class="methods">
+                    <h3>Key Methods</h3>
+                    <ul>
+                        <li>SCQA Method for structured problem articulation</li>
+                        <li>5W2H Questions for comprehensive problem capture</li>
+                        <li>Reframing to eliminate limiting assumptions</li>
+                        <li>Quantifiable documentation and symptom conversion</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Phase 2 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <div>Containment & Risk Assessment</div>
+                </div>
+                <p>Before diving deep into analysis, implement immediate actions for damage control. Assess the risk and impact of the problem, form an effective <strong>Cross-Functional Team (CFT)</strong>, and create a communication plan. This phase prevents the problem from worsening during analysis.</p>
+                <p>Rapid containment actions serve as a temporary shield while you work on the root cause. Document all containment measures and their effectiveness to inform later permanent solutions.</p>
+                <div class="methods">
+                    <h3>Key Actions</h3>
+                    <ul>
+                        <li>Implement immediate containment measures</li>
+                        <li>Risk and impact assessment</li>
+                        <li>Form Cross-Functional Team (CFT)</li>
+                        <li>Establish communication plan</li>
+                        <li>Document containment effectiveness</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Phase 3 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <div>Data Collection & Measurement</div>
+                </div>
+                <p>Quantify the problem through systematic data collection from every process step. Identify key metrics (KPIs) that must be monitored throughout the process and determine how well the current process is functioning. Use <strong>Is / Is Not analysis</strong>: "Is" data supports the facts, while "Is Not" data eliminates many possible error causes.</p>
+                <p>Create a timeline from normal state to problem occurrence and collect evidence in a structured manner. This forms the factual basis for all further analyses.</p>
+                <div class="methods">
+                    <h3>Key Methods</h3>
+                    <ul>
+                        <li>Systematic data collection from all process steps</li>
+                        <li>Identify and monitor Key Performance Indicators (KPIs)</li>
+                        <li>Is / Is Not analysis for cause elimination</li>
+                        <li>Timeline creation from normal to problem state</li>
+                        <li>Structured evidence documentation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Phase 4 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">4</div>
+                    <div>Root Cause Analysis</div>
+                </div>
+                <p>This is the analytical core phase where you identify the actual causes, not just symptoms. Utilize multiple analysis tools to ensure comprehensive understanding:</p>
+                <div class="methods">
+                    <h3>Analysis Tools</h3>
+                    <ul>
+                        <li><strong>5-Why Method:</strong> Ask "Why?" five times to get to the root causes</li>
+                        <li><strong>Fishbone Diagram (Ishikawa):</strong> Visualize all possible causes categorized</li>
+                        <li><strong>FMEA (Failure Mode and Effects Analysis):</strong> Identify possible product, service, and process failures</li>
+                        <li><strong>Comparative Analysis:</strong> Compare "Is" and "Is Not" items, note changes and temporal relationships</li>
+                    </ul>
+                </div>
+                <p>Develop root cause theories from the remaining possible causes and validate them through experiments with empirical data. Establish a causal graph between root cause and problem.</p>
+            </div>
+            
+            <!-- Phase 5 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">5</div>
+                    <div>Solution Development & Implementation</div>
+                </div>
+                <p>Generate solutions that directly address the root causes, not the symptoms. Use <strong>TRIZ methodology</strong>: Search for solutions that have already worked in other industries and are adaptable. Brainstorm various solution approaches in the team and evaluate them based on impact and effort.</p>
+                <p>Create detailed action plans with assigned roles, responsibilities, and timelines. Conduct <strong>pilot implementations</strong> before scaling fully. Collect data to confirm that measurable improvements have occurred. Set milestones that can be tracked against the goals established in the definition phase.</p>
+                <div class="methods">
+                    <h3>Implementation Steps</h3>
+                    <ul>
+                        <li>Generate solutions addressing root causes</li>
+                        <li>Apply TRIZ methodology for cross-industry solutions</li>
+                        <li>Team brainstorming and impact/effort evaluation</li>
+                        <li>Detailed action plans with roles and timelines</li>
+                        <li>Pilot implementations before full scaling</li>
+                        <li>Data collection for improvement verification</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Phase 6 -->
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">6</div>
+                    <div>Control & Prevention</div>
+                </div>
+                <p>The control phase ensures that implemented changes remain permanently effective. Create a <strong>Control Plan</strong> that documents the process, including metrics for success measurement. Implement <strong>Poka Yoke</strong> (error-proofing) and <strong>Statistical Process Control (SPC)</strong> for continuous monitoring.</p>
+                <p>Verify the status and effectiveness of the solution. Every solution must prevent the recurrence of the same problem. Conduct training and documentation so that other team members understand and can apply the solution. This enables easy transferability to other people in the environment.</p>
+                <div class="methods">
+                    <h3>Control Mechanisms</h3>
+                    <ul>
+                        <li>Create comprehensive Control Plan</li>
+                        <li>Implement Poka Yoke (error-proofing)</li>
+                        <li>Deploy Statistical Process Control (SPC)</li>
+                        <li>Verify solution status and effectiveness</li>
+                        <li>Conduct training and documentation</li>
+                        <li>Ensure solution transferability</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Meta Principles -->
+            <div class="meta-principles">
+                <h2>Meta-Principles for Effective Problem Solving</h2>
+                
+                <div class="principle-card">
+                    <h3>🎯 Prioritization</h3>
+                    <p>Focus on high-impact problems with appropriate effort first. Base problem-solving on the currently biggest problem (CSF - Critical Success Factor: "Bottleneck").</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>📊 MECE Structure</h3>
+                    <p>All hypotheses should be Mutually Exclusive and Collectively Exhaustive – covering all scenarios without overlaps. The model is complete, with no element missing in solving any problem.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>⚖️ Objective Evaluation</h3>
+                    <p>The choice of solutions must be objective regarding the set goals for all involved parties. Measurement of results must be possible immediately after solving the first problem.</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3>💰 ROI Focus</h3>
+                    <p>The model must deliver the best ROI (small investment – large results) and generate a large number of solved problems per time invested.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        });
+        
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('darkModeToggle');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.innerHTML = '☀️ Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                btn.innerHTML = '🌙 Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkModeToggle').innerHTML = '☀️ Light Mode';
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
